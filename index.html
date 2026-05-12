@@ -1,13 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cursa Aqui</title>
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Site CursoAqui</h1>
-    <p>Bem vindo!</p>
+
+  <!-- Loading -->
+  <div id="loading-screen">
+    <div class="loader"></div>
+    <h2>Cursa Aqui</h2>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast-container"></div>
+
+  <!-- Navbar -->
+  <header class="navbar glass">
+    <div class="logo">🎓 Cursa Aqui</div>
+
+    <nav>
+      <a href="#home">Início</a>
+      <a href="#courses">Cursos</a>
+      <a href="#teachers">Professores</a>
+      <a href="#faq">FAQ</a>
+      <a href="#dashboard">Dashboard</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="theme-toggle">🌙</button>
+      <button class="btn-primary" onclick="openAuthModal()">Entrar</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Aprenda tecnologia com experiência premium</h1>
+      <p>
+        Cursos modernos, quizzes interativos,
+        certificados elegantes e dashboards completos.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn-primary">Explorar Cursos</button>
+        <button class="btn-secondary">Modo Demonstração</button>
+      </div>
+    </div>
+
+    <div class="hero-card glass">
+      <h3>+12.000 alunos</h3>
+      <p>Aprendendo diariamente na plataforma.</p>
+    </div>
+  </section>
+
+  <!-- Search -->
+  <section class="search-section">
+    <input type="text" id="searchInput" placeholder="Pesquisar cursos...">
+
+    <select id="categoryFilter">
+      <option value="all">Todas Categorias</option>
+      <option value="Front-end">Front-end</option>
+      <option value="Back-end">Back-end</option>
+      <option value="Design">Design</option>
+    </select>
+  </section>
+
+  <!-- Courses -->
+  <section class="courses" id="courses">
+    <h2 class="section-title">Cursos em Destaque</h2>
+
+    <div class="course-grid" id="courseGrid"></div>
+  </section>
+
+  <!-- Teachers -->
+  <section class="teachers" id="teachers">
+    <h2 class="section-title">Professores</h2>
+
+    <div class="teacher-grid">
+
+      <div class="teacher-card glass">
+        <img src="https://i.pravatar.cc/150?img=11">
+        <h3>Mariana Silva</h3>
+        <p>Especialista Front-end</p>
+      </div>
+
+      <div class="teacher-card glass">
+        <img src="https://i.pravatar.cc/150?img=12">
+        <h3>Carlos Mendes</h3>
+        <p>Node.js & APIs</p>
+      </div>
+
+      <div class="teacher-card glass">
+        <img src="https://i.pravatar.cc/150?img=13">
+        <h3>Juliana Costa</h3>
+        <p>UI/UX Designer</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <section class="dashboard-section" id="dashboard">
+
+    <h2 class="section-title">Dashboard</h2>
+
+    <div class="dashboard-grid">
+
+      <div class="dashboard-card glass">
+        <h3>Cursos em andamento</h3>
+        <h1>5</h1>
+      </div>
+
+      <div class="dashboard-card glass">
+        <h3>Certificados</h3>
+        <h1>2</h1>
+      </div>
+
+      <div class="dashboard-card glass">
+        <h3>Ranking</h3>
+        <h1>#18</h1>
+      </div>
+
+      <div class="dashboard-card glass">
+        <h3>XP</h3>
+        <h1>8.400</h1>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <h2 class="section-title">FAQ</h2>
+
+    <div class="faq-item glass">
+      <h3>Os cursos possuem certificado?</h3>
+      <p>Sim, certificados fictícios elegantes são gerados automaticamente.</p>
+    </div>
+
+    <div class="faq-item glass">
+      <h3>Posso estudar gratuitamente?</h3>
+      <p>Você pode acessar a primeira aula gratuitamente no modo demonstração.</p>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <h3>Cursa Aqui © 2026</h3>
+    <p>Plataforma educacional moderna.</p>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal" id="authModal">
+
+    <div class="modal-content glass">
+
+      <span class="close" onclick="closeAuthModal()">×</span>
+
+      <div class="tabs">
+        <button onclick="showLogin()">Login</button>
+        <button onclick="showRegister()">Cadastro</button>
+      </div>
+
+      <!-- Login -->
+      <div id="loginForm">
+        <h2>Entrar</h2>
+
+        <input type="email" id="loginEmail" placeholder="E-mail">
+        <input type="password" id="loginPassword" placeholder="Senha">
+
+        <button class="btn-primary" onclick="login()">Entrar</button>
+      </div>
+
+      <!-- Register -->
+      <div id="registerForm" style="display:none;">
+        <h2>Cadastrar</h2>
+
+        <input type="text" id="registerName" placeholder="Nome">
+        <input type="email" id="registerEmail" placeholder="E-mail">
+        <input type="password" id="registerPassword" placeholder="Senha">
+
+        <select id="registerRole">
+          <option value="student">Aluno</option>
+          <option value="teacher">Professor</option>
+        </select>
+
+        <button class="btn-primary" onclick="register()">Criar Conta</button>
+      </div>
+
+    </div>
+
+  </div>
+
+<!-- Certificate Modal -->
+<div class="modal" id="certificateModal">
+
+  <div class="certificate">
+
+    <span class="close-cert" onclick="closeCertificate()">
+      ✕
+    </span>
+
+    <h1>CERTIFICADO</h1>
+
+    <p>Certificamos que</p>
+
+    <h2 id="certUser">Aluno</h2>
+
+    <p>concluiu com sucesso o curso</p>
+
+    <h3 id="certCourse">Curso</h3>
+
+    <p id="certDate"></p>
+
+    <div class="seal">🏅</div>
+
+    <div class="signature">
+      <p>Assinatura Oficial</p>
+    </div>
+
+    <div class="certificate-buttons">
+
+      <button class="btn-primary" onclick="window.print()">
+        Imprimir
+      </button>
+
+      <button class="btn-secondary" onclick="closeCertificate()">
+        Fechar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- Chatbot -->
+  <div class="chatbot glass">
+    💬 Precisa de ajuda?
+  </div>
+
+  <script src="courses.js"></script>
+  <script src="auth.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="certificate.js"></script>
+  <script src="app.js"></script>
+
 </body>
 </html>
